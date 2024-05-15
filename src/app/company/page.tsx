@@ -169,41 +169,35 @@ const CompanyForm: React.FC = () => {
     const handleSaveEmployees = () => {
         localStorage.setItem('employeeData', JSON.stringify(employeeData));
 
-     
-        const handleSaveEmployees = () => {
-            localStorage.setItem("employeeData", JSON.stringify(employeeData));
-        
-            const sendToBackend = async (data: FormValues, employeeData: EmployeeFormValues) => {
-              const wrappedJson = {
+        const sendToBackend = async (data: FormValues, employeeData: EmployeeFormValues) => {
+            const wrappedJson = {
                 companyData: data,
                 employeeData,
-              };
-        
-              try {
+            };
+
+            try {
                 const response = await fetch("http://localhost:8080/api/saveData", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(wrappedJson),
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(wrappedJson),
                 });
-        
+
                 if (!response.ok) {
-                  throw new Error("Network response was not ok");
+                    throw new Error("Network response was not ok");
                 }
-        
+
                 const responseData = await response.json();
                 console.log("Data successfully sent to the backend", responseData);
-              } catch (error) {
+            } catch (error) {
                 console.error("Error sending data to the backend", error);
-              }
-            };
-        
-            if (companyData) {
-              sendToBackend(companyData, employeeData);
             }
-          };
+        };
 
+        if (companyData) {
+            sendToBackend(companyData, employeeData);
+        }
     };
 
     console.log(companyData)
@@ -219,7 +213,6 @@ const CompanyForm: React.FC = () => {
 
                 <div className="flex">
                     <div className="w-1/4 bg-gray-200 bg-opacity-25 rounded-lg hidden lg:block">
-
                         <nav>
                             <ul>
                                 <div className={`rounded-lg ${view === 'company' ? 'border border-secondary bg-gray-400 bg-opacity-25 ' : ''}`}>
